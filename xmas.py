@@ -1,8 +1,10 @@
 import dpkt
 import socket
+from collections import defaultdict
 
 f = open('xmas.pcap')
 pcap = dpkt.pcap.Reader(f)
+ip_count = defaultdict(int)
 
 def inet_to_str(inet):
     try:
@@ -19,9 +21,8 @@ for ts, buf in pcap:
         if type(ip.data) == dpkt.tcp.TCP:
             tcp = ip.data
             if tcp.flags==41:
-                print inet_to_str(ip.src)
-                #print inet_to_str(ip.dst)
-                print     
+                ip_count[inet_to_str(ip.src)]+=1
+                #print inet_to_str(ip.dst)  
 
     """tcp = ip.data
     if type(tcp) == dpkt.tcp.TCP:
@@ -32,5 +33,8 @@ for ts, buf in pcap:
     """if tcp.dport == 80 and len(tcp.data) > 0:
         http = dpkt.http.Request(tcp.data)
         print http.uri"""
+
+for ip in ip_count.keys():
+    print(ip)
 
 f.close()
