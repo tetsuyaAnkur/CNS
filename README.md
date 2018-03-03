@@ -5,7 +5,7 @@ This repository contains code for detecting Xmas Scans.
 * dpkt==1.9.1
 
 # Installing Prerequisites
-#pip install dpkt
+    pip install dpkt
 
 # Introduction
 An attacker uses a TCP Xmas Scan to determine which ports are closed on the target machine. 
@@ -16,4 +16,4 @@ This behavior allows an attacker to scan for closed ports by sending rule-breaki
 Additionally, because open ports are inferred via no responses being generated, Xmas scan cannot distinguish an open port from a filtered port.
 
 # Executing the code
-#python xmas.py xmas.pcap
+    python xmas.py xmas.pcap
